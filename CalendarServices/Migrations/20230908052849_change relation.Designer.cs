@@ -4,14 +4,16 @@ using CalendarServices.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CalendarServices.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230908052849_change relation")]
+    partial class changerelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,21 +31,15 @@ namespace CalendarServices.Migrations
 
                     b.Property<DateTime>("Calendar_ReservationDate");
 
-                    b.Property<TimeSpan>("Calendar_TimeService");
-
                     b.Property<int?>("Customer_Id");
 
                     b.Property<int?>("Service_Id");
-
-                    b.Property<int>("Ss_id");
 
                     b.HasKey("Calendar_Id");
 
                     b.HasIndex("Customer_Id");
 
                     b.HasIndex("Service_Id");
-
-                    b.HasIndex("Ss_id");
 
                     b.ToTable("Calendars");
                 });
@@ -82,19 +78,6 @@ namespace CalendarServices.Migrations
                     b.ToTable("HairDressers");
                 });
 
-            modelBuilder.Entity("CalendarServices.Model.StatusOfTheService", b =>
-                {
-                    b.Property<int>("Ss_id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Ss_Status");
-
-                    b.HasKey("Ss_id");
-
-                    b.ToTable("StatusOfTheServices");
-                });
-
             modelBuilder.Entity("CalendarServices.Model.Calendar", b =>
                 {
                     b.HasOne("CalendarServices.Model.Customer", "Customer")
@@ -104,11 +87,6 @@ namespace CalendarServices.Migrations
                     b.HasOne("CalendarServices.Model.HairDresserService", "HairDresserService")
                         .WithMany()
                         .HasForeignKey("Service_Id");
-
-                    b.HasOne("CalendarServices.Model.StatusOfTheService", "StatusOfTheService")
-                        .WithMany()
-                        .HasForeignKey("Ss_id")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

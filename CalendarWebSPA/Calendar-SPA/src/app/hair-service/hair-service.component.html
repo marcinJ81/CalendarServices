@@ -1,0 +1,22 @@
+<p *ngFor="let item of serivcesList">
+    {{item.id}} {{item.name}} {{item.price}}
+</p>
+
+<div *ngIf="serivcesList">
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nazwa </th>
+          <th>Cena </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of serivcesList">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
