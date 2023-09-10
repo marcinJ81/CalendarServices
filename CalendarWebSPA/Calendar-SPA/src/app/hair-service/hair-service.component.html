@@ -10,9 +10,33 @@
       <tbody>
         <tr *ngFor="let item of serivcesList">
           <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
+          <td>{{ item.nameService }}</td>
           <td>{{ item.price }}</td>
         </tr>
       </tbody>
     </table>
   </div>
+<!--#f="ngForm" to jest odwolanie do formularza-->
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label>Service Name</label>
+        <input 
+            class="form-control form-control-lg"
+            placeholder="Service Name"
+            name="name"
+            [(ngModel)]="newHairService.nameService" > <!-- Używasz ngModel do dwukierunkowego powiązania danych -->
+      </div>
+      <div class="form-group col-md-3">
+        <label>Price</label>
+        <input class="form-control form-control-lg" placeholder="Price"
+               name="price" 
+               [(ngModel)]="newHairService.price"/> <!-- Używasz ngModel do dwukierunkowego powiązania danych -->
+      </div>
+      <div class="form-group">
+        <label></label>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+      </div>
+    </div>
+</form>
+

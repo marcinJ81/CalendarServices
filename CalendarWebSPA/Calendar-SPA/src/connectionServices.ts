@@ -20,11 +20,12 @@ export class ConnectionServices {
   }
 
   getServices(): any{
-    this.http.get("http://localhost:5000/api/HairDresserServices").subscribe(response =>
+    this.http.get(this.apiUrl).subscribe(response =>
     {
       return response; 
     }, error => {
       console.log(error);
     });
   }
+
 }

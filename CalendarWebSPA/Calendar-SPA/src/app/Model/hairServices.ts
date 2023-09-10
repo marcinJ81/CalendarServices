@@ -1,5 +1,10 @@
 export class hairServicesDTO{
-    id: number | undefined;
-    name: string | undefined;
-    price: string | undefined; 
+    id: number;
+    nameService: string;
+    price: string; 
+    constructor() {
+        this.id = 0;
+        this.nameService = "";
+        this.price = "";
+    }
 }
