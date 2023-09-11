@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-sm-12 col-md-4 form-group ">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div class="form-row">
+                <div class="form-group col-md-12 table-class2">
+                    <label>Service Name</label>
+                    <input 
+                        class="form-control form-control-lg"
+                        placeholder="Service Name"
+                        name="name"
+                        [(ngModel)]="newHairService.nameService" 
+                        required
+                        #nameService="ngModel"/> 
+                        <span class="help-block" *ngIf="!nameService.valid && nameService.touched">To pole nie może być puste</span>
+                </div>
+                <div class="form-group col-md-12 table-class2">
+                    <label>Price</label>
+                    <input class="form-control form-control-lg" placeholder="Price"
+                        name="price" 
+                        [(ngModel)]="newHairService.price"
+                        required/> 
+                </div>
+                <div class="form-group table-class2">
+                    <label></label>
+                    <button class="btn btn-primary btn-lg btn-block" 
+                    type="submit"
+                    [disabled]="!f.valid"
+                    >Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

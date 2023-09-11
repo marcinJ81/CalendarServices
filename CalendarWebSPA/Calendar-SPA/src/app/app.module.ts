@@ -6,11 +6,14 @@ import { AppComponent } from './app.component';
 import { HairServiceComponent } from './hair-service/hair-service.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { AddHairServiceComponent } from './add-hair-service/add-hair-service.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HairServiceComponent
+    HairServiceComponent,
+    AddHairServiceComponent
   ],
   imports: [
     BrowserModule,

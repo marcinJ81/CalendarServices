@@ -50,6 +50,10 @@ namespace CalendarServices.Controllers
 		[HttpPost]
 		public ActionResult CreateService([FromBody] HairDresserServiceDto modelDto)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 			var result = mapper.Map<HairDresserService>(modelDto);
 			var newServiceId = CommandService.CreateService(result);
 			return Created($"api/HairDresserServices/{newServiceId}", null);
@@ -66,7 +70,6 @@ namespace CalendarServices.Controllers
 			}
 			localService.Service_Name = model.Name;
 			localService.Service_Price = Convert.ToDecimal(model.Price);
-			//jeszce jedna warstwa commandhandler i tam mapowanie
 			CommandService.UpdateService(localService);
 			return Ok();
 		}

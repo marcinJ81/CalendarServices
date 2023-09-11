@@ -1,0 +1,16 @@
+.table-class{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+.table-class2 {
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
