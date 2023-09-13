@@ -18,7 +18,8 @@ namespace CalendarServices.Model
 			CreateMap<HairDresserServiceDto, HairDresserService>()
 				.ForMember(x => x.Service_Name, y => y.MapFrom(z => z.NameService))
 				.ForMember(x => x.Service_Price, y => y.MapFrom(z => Convert.ToDecimal(z.Price)))
-				.ForMember(x => x.Service_Time, y => y.MapFrom(z => Convert.ToDateTime(z.ServiceTime).TimeOfDay));
+				.ForMember(x => x.TypeService, y => y.Ignore())
+				.ForMember(x => x.TypeService_Id, y => y.Ignore());
 
 		}
 	}

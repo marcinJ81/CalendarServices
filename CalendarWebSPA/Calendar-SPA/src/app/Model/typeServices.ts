@@ -1,8 +1,8 @@
 export class typeService{
-    typeService_id: number;
-    typeService_name: string;
+    typeService_Id: number;
+    typeService_Name: string;
     constructor() {
-        this.typeService_id = 0;
-        this.typeService_name = "";
+        this.typeService_Id = 0;
+        this.typeService_Name = "";
     }
 }

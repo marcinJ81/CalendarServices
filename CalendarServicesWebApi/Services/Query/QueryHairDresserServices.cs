@@ -34,5 +34,12 @@ namespace CalendarServices.Services.Query
 					.TypeServices
 					.ToList();
 		}
+
+		public TypeService GetTypeService(string typeName)
+		{
+			return DataBaseContext
+					.TypeServices
+					.FirstOrDefault(x => x.TypeService_Name == typeName);				
+		}
 	}
 }

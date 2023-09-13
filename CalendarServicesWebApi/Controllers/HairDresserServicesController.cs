@@ -62,6 +62,17 @@ namespace CalendarServices.Controllers
 				return BadRequest(ModelState);
 			}
 			var result = mapper.Map<HairDresserService>(modelDto);
+			result.Service_Time = TimeSpan.Parse(modelDto.ServiceTime);
+			var typeService = QueryService.GetTypeService(modelDto.TypeService);
+			if (typeService != null)
+			{
+				result.TypeService_Id = typeService.TypeService_Id;	
+			}
+			else 
+			{
+				result.TypeService_Id = null;
+			}
+			result.Service_Archival = false;
 			var newServiceId = CommandService.CreateService(result);
 			return Created($"api/HairDresserServices/{newServiceId}", null);
 		}

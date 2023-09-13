@@ -3,6 +3,8 @@ import { hairServicesDTO } from '../Model/hairServices';
 import { NgForm } from '@angular/forms';
 import { ConnectionServices } from 'src/connectionServices';
 import { endPointWebApi } from '../Model/endPointWebApi';
+import { typeService } from '../Model/typeServices';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-add-hair-service',
@@ -12,16 +14,18 @@ import { endPointWebApi } from '../Model/endPointWebApi';
 export class AddHairServiceComponent implements OnInit {
   newHairService: hairServicesDTO = new hairServicesDTO();
   @ViewChild('f') signupForm!: NgForm;
-  defaultValue: string = "Nazwa usługi";
-  answer ='';
-  typeService = ['kobieta','mężczyzna','dziecko'];
+  typeServiceList: typeService[] = [];
+  selectedType: string = 'Kobieta';
   hairServiceUrl: endPointWebApi;
+  defaultTime: Date = new Date();
+  formValue: object | undefined;
 
   constructor(private service: ConnectionServices) {
     this.hairServiceUrl = new endPointWebApi();
   }
 
   ngOnInit(): void {
+    this.getTypeServices();
   }
   
   onSubmit(form: NgForm) {
@@ -30,8 +34,25 @@ export class AddHairServiceComponent implements OnInit {
   }
 
   insertRecord(form:NgForm) {
-    console.log(this.newHairService.nameService);
-      this.service.postData(form,this.hairServiceUrl.HairServiceUrl).subscribe(
+    //one way
+    let newService: hairServicesDTO = {
+      nameService: form.value.serviceData.nameService,
+      serviceTime: form.value.serviceTime,
+      id: 0,
+      price: form.value.serviceData.price,
+      typeService: form.value.typeServiceName
+    }
+    //another way
+    let newService2: hairServicesDTO = {
+      nameService: this.signupForm.value.serviceData.nameService,
+      serviceTime: this.signupForm.value.serviceTime,
+      id: 0,
+      price: this.signupForm.value.serviceData.price,
+      typeService: this.signupForm.value.typeServiceName
+    }
+
+     this.formValue = form.value;
+      this.service.postData(newService2,this.hairServiceUrl.HairServiceUrl).subscribe(
         res => {
           this.refreshValue();
         },
@@ -46,17 +67,14 @@ export class AddHairServiceComponent implements OnInit {
     }
 
     suggestValue(){
-      this.signupForm.setValue({
-        serviceData: {
-          nameService: 'nazwa usługi',
-          price: '11'
-        },
-        questionAnswer: '',
-        typeService: 'dziecko'
+      this.signupForm.form.patchValue({
+        serviceTime: this.defaultTime.getTime()
       });
     }
 
     getTypeServices(){
-
+      this.service.getData(this.hairServiceUrl.TypeServiceUrl).subscribe((result: typeService[]) => {
+        this.typeServiceList = result;
+      });
     }
 }

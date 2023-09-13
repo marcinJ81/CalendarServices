@@ -12,7 +12,7 @@ namespace CalendarServices.ModelDTO
 		[Required]
 		[Range(10,1000)]
 		public string Price { get; set; }
-		public TimeSpan ServiceTime { get; set; } 
+		public string ServiceTime { get; set; } 
 		public String TypeService { get; set; }
 	}
 }

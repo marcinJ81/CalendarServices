@@ -13,12 +13,6 @@
                             #nameService="ngModel"/> 
                             <span class="help-block" *ngIf="!nameService.valid && nameService.touched">To pole nie może być puste</span>
                     </div>
-                    <button 
-                        class="btn btn-default"
-                        type="button"
-                        (click)="suggestValue()">
-                        Wypełnij pola domyślnie
-                    </button>
                     <div class="form-group col-md-12 padding-component">
                         <label>Cena</label>
                         <input class="form-control form-control-lg" placeholder="Price"
@@ -29,21 +23,23 @@
                 </div>
                 <div class="form-group padding-component">
                     <label>Czas wykonania usługi</label>
-                        <input class="form-control form-control-lg" placeholder="Time"
+                        <input type="time" class="form-control form-control-lg"
                             name="serviceTime" 
                             [(ngModel)]="newHairService.serviceTime"/> 
                 </div>
-                <p>Wybierz rodzaj klienta</p>
-                <div class="radio padding-component" *ngFor="let typeName of typeService">
-                    <label>
-                        <input 
-                        type="radio"
-                        name="typeService"
-                        ngModel
-                        [value]="typeName">
-                        {{typeName}}
-                    </label>
-                </div>
+                <p class="padding-p-component">Wybierz rodzaj klienta</p>
+                <div class="form-group padding-component">
+                    <select 
+                        name="typeServiceName" 
+                        id="typeServiceName" 
+                        [ngModel]="selectedType" 
+                        class="drop-down form-control">
+                        <option
+                        *ngFor="let typeName of typeServiceList"
+                        [value]="typeName.typeService_Name"
+                        > {{typeName.typeService_Name}}</option>
+                    </select>
+                </div> 
                 <div class="form-group padding-component">
                     <label></label>
                     <button class="btn btn-primary btn-lg btn-block" 
