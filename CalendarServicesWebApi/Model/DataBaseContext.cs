@@ -10,6 +10,7 @@ namespace CalendarServices.Model
 		public DbSet<HairDresserService> HairDressers { get; set; }
 		public DbSet<Calendar> Calendars { get; set; }
 		public DbSet<StatusOfTheService> StatusOfTheServices { get; set; }
+		public DbSet<TypeService> TypeServices { get; set; }
 
 		public DataBaseContext(IConfiguration configuration)
 		{

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CalendarServices.Model
 {
@@ -7,10 +9,13 @@ namespace CalendarServices.Model
 		[Key]
 		public int Service_Id { get; set; }
 		[Required]
-		[MaxLength(50)]
 		public string Service_Name { get; set; }
 		[Required]
-		[Range(10,100)]
 		public decimal Service_Price { get; set; }
+		public TimeSpan Service_Time { get; set; }
+		[ForeignKey("TypeService_Id")]
+		public int? TypeService_Id { get; set; }
+		public virtual TypeService TypeService { get; set; }
+		public bool Service_Archival { get; set; }
 	}
 }

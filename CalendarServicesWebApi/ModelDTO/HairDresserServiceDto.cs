@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CalendarServices.ModelDTO
 {
@@ -11,5 +12,7 @@ namespace CalendarServices.ModelDTO
 		[Required]
 		[Range(10,1000)]
 		public string Price { get; set; }
+		public TimeSpan ServiceTime { get; set; } 
+		public String TypeService { get; set; }
 	}
 }
