@@ -11,7 +11,10 @@ import { ConnectionServices } from 'src/connectionServices';
 export class AddHairServiceComponent implements OnInit {
   newHairService: hairServicesDTO = new hairServicesDTO();
   @ViewChild('f') signupForm!: NgForm;
-  
+  defaultValue: string = "Nazwa usługi";
+  answer ='';
+  typeService = ['kobieta','mężczyzna','dziecko'];
+
   constructor(private service: ConnectionServices) { }
 
   ngOnInit(): void {
@@ -26,7 +29,7 @@ export class AddHairServiceComponent implements OnInit {
     console.log(this.newHairService.nameService);
       this.service.postData(this.newHairService).subscribe(
         res => {
-          //this.refreshList();
+          this.refreshValue();
         },
         err => {
           console.log(err);
@@ -34,4 +37,19 @@ export class AddHairServiceComponent implements OnInit {
       );
     }
 
+    refreshValue() {
+      this.newHairService.nameService = '';
+      this.newHairService.price = '';
+    }
+
+    suggestValue(){
+      this.signupForm.setValue({
+        serviceData: {
+          nameService: 'nazwa usługi',
+          price: '11'
+        },
+        questionAnswer: '',
+        typeService: 'dziecko'
+      });
+    }
 }

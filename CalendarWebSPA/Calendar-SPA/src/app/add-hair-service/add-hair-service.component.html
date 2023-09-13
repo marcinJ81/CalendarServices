@@ -2,25 +2,50 @@
     <div class="col-sm-12 col-md-4 form-group ">
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="form-row">
-                <div class="form-group col-md-12 table-class2">
-                    <label>Service Name</label>
-                    <input 
-                        class="form-control form-control-lg"
-                        placeholder="Service Name"
-                        name="name"
-                        [(ngModel)]="newHairService.nameService" 
-                        required
-                        #nameService="ngModel"/> 
-                        <span class="help-block" *ngIf="!nameService.valid && nameService.touched">To pole nie może być puste</span>
+                <div id="service-data" ngModelGroup="serviceData">
+                    <div class="form-group col-md-12 padding-component">
+                        <label>Service Name</label>
+                        <input 
+                            class="form-control form-control-lg"
+                            name="nameService"
+                            [(ngModel)]="newHairService.nameService" 
+                            required
+                            #nameService="ngModel"/> 
+                            <span class="help-block" *ngIf="!nameService.valid && nameService.touched">To pole nie może być puste</span>
+                    </div>
+                    <button 
+                        class="btn btn-default"
+                        type="button"
+                        (click)="suggestValue()">
+                        Wypełnij pola domyślnie
+                    </button>
+                    <div class="form-group col-md-12 padding-component">
+                        <label>Price</label>
+                        <input class="form-control form-control-lg" placeholder="Price"
+                            name="price" 
+                            [(ngModel)]="newHairService.price"
+                            required/> 
+                    </div>
                 </div>
-                <div class="form-group col-md-12 table-class2">
-                    <label>Price</label>
-                    <input class="form-control form-control-lg" placeholder="Price"
-                        name="price" 
-                        [(ngModel)]="newHairService.price"
-                        required/> 
+                <div class="form-group padding-component">
+                    <textarea      
+                    name="questionAnswer"               
+                    rows="3" 
+                    class="form-control"                   
+                    [(ngModel)]="answer"></textarea>
                 </div>
-                <div class="form-group table-class2">
+                <p>Twoja odpowiedz: {{answer}}</p>
+                <div class="radio padding-component" *ngFor="let typeName of typeService">
+                    <label>
+                        <input 
+                        type="radio"
+                        name="typeService"
+                        ngModel
+                        [value]="typeName">
+                        {{typeName}}
+                    </label>
+                </div>
+                <div class="form-group padding-component">
                     <label></label>
                     <button class="btn btn-primary btn-lg btn-block" 
                     type="submit"
