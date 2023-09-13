@@ -6,20 +6,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ConnectionServices {
-  private apiUrl = 'http://localhost:5000/api/HairDresserServices';
 
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  getData(apiUrl: string): Observable<any> {
+    return this.http.get(apiUrl);
   }
 
-  postData(data: any): Observable<any> {
-    return this.http.post(this.apiUrl, data);
+  postData(data: any, apiUrl: string): Observable<any> {
+    return this.http.post(apiUrl, data);
   }
 
-  getServices(): any{
-    this.http.get(this.apiUrl).subscribe(response =>
+  getServices(apiUrl: string): any{
+    this.http.get(apiUrl).subscribe(response =>
     {
       return response; 
     }, error => {

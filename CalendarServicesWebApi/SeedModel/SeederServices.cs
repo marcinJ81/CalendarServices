@@ -22,6 +22,12 @@ namespace CalendarServices.SeedModel
 					DataBaseContext.HairDressers.AddRange(services);
 					DataBaseContext.SaveChanges();
 				}
+				if (!DataBaseContext.TypeServices.Any())
+				{
+					var typeServices = GetTypeServices();
+					DataBaseContext.TypeServices.AddRange(typeServices);
+					DataBaseContext.SaveChanges();
+				}
 			}
 		}
 
@@ -39,6 +45,24 @@ namespace CalendarServices.SeedModel
 						Service_Name = "koloryzacja",
 						Service_Price = 80
 					}
+			};
+		}
+
+		private IEnumerable<TypeService> GetTypeServices()
+		{
+			return new List<TypeService>()
+			{
+				new TypeService
+				{
+					TypeService_Name = "Kobieta"
+				},
+				new TypeService
+				{
+					TypeService_Name = "Meżczyzna"
+				},
+				new TypeService {
+					TypeService_Name = "Dziecko"
+				}
 			};
 		}
 	}

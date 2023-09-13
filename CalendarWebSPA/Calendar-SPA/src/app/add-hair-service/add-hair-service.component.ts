@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { hairServicesDTO } from '../Model/hairServices';
 import { NgForm } from '@angular/forms';
 import { ConnectionServices } from 'src/connectionServices';
+import { endPointWebApi } from '../Model/endPointWebApi';
 
 @Component({
   selector: 'app-add-hair-service',
@@ -14,8 +15,11 @@ export class AddHairServiceComponent implements OnInit {
   defaultValue: string = "Nazwa usługi";
   answer ='';
   typeService = ['kobieta','mężczyzna','dziecko'];
+  hairServiceUrl: endPointWebApi;
 
-  constructor(private service: ConnectionServices) { }
+  constructor(private service: ConnectionServices) {
+    this.hairServiceUrl = new endPointWebApi();
+  }
 
   ngOnInit(): void {
   }
@@ -27,7 +31,7 @@ export class AddHairServiceComponent implements OnInit {
 
   insertRecord(form:NgForm) {
     console.log(this.newHairService.nameService);
-      this.service.postData(this.newHairService).subscribe(
+      this.service.postData(form,this.hairServiceUrl.HairServiceUrl).subscribe(
         res => {
           this.refreshValue();
         },
@@ -38,8 +42,7 @@ export class AddHairServiceComponent implements OnInit {
     }
 
     refreshValue() {
-      this.newHairService.nameService = '';
-      this.newHairService.price = '';
+      this.signupForm.reset();
     }
 
     suggestValue(){
@@ -51,5 +54,9 @@ export class AddHairServiceComponent implements OnInit {
         questionAnswer: '',
         typeService: 'dziecko'
       });
+    }
+
+    getTypeServices(){
+
     }
 }

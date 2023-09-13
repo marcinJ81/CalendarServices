@@ -46,6 +46,13 @@ namespace CalendarServices.Controllers
 			return Ok(service);
 		}
 
+		[HttpGet("typeServices")]
+		public ActionResult<IEnumerable<TypeService>> GetTypeServices()
+		{
+			var typService = QueryService.GetTypeService();
+			return Ok(typService);
+		}
+
 		// POST api/<HairDresserServicesController>
 		[HttpPost]
 		public ActionResult CreateService([FromBody] HairDresserServiceDto modelDto)

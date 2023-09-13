@@ -1,4 +1,5 @@
 ﻿using CalendarServices.Model;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +24,14 @@ namespace CalendarServices.Services.Query
 		{
 			return DataBaseContext
 					.HairDressers
+					.Include(x => x.TypeService)
+					.ToList();
+		}
+
+		public IEnumerable<TypeService> GetTypeService()
+		{
+			return	DataBaseContext
+					.TypeServices
 					.ToList();
 		}
 	}

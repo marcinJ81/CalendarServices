@@ -5,6 +5,7 @@ import { ConnectionServices } from 'src/connectionServices';
 import { hairServicesDTO } from '../Model/hairServices';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { endPointWebApi } from '../Model/endPointWebApi';
 
 @Component({
   selector: 'app-hair-service',
@@ -13,15 +14,18 @@ import { FormsModule } from '@angular/forms';
 })
 export class HairServiceComponent implements OnInit {
   serivcesList: hairServicesDTO[] | undefined;
+  hairServiceUrl: endPointWebApi;
  
-  constructor(private service: ConnectionServices) { }
+  constructor(private service: ConnectionServices) {
+    this.hairServiceUrl = new endPointWebApi();
+   }
 
   ngOnInit(): void {
     this.refreshList();
   }
 
   refreshList(): void {
-    this.service.getData().subscribe((result: hairServicesDTO[]) => {
+    this.service.getData(this.hairServiceUrl.HairServiceUrl).subscribe((result: hairServicesDTO[]) => {
       this.serivcesList = result;
     });
   }

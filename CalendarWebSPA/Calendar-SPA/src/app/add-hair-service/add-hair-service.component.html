@@ -4,7 +4,7 @@
             <div class="form-row">
                 <div id="service-data" ngModelGroup="serviceData">
                     <div class="form-group col-md-12 padding-component">
-                        <label>Service Name</label>
+                        <label>Nazwa usługi</label>
                         <input 
                             class="form-control form-control-lg"
                             name="nameService"
@@ -20,7 +20,7 @@
                         Wypełnij pola domyślnie
                     </button>
                     <div class="form-group col-md-12 padding-component">
-                        <label>Price</label>
+                        <label>Cena</label>
                         <input class="form-control form-control-lg" placeholder="Price"
                             name="price" 
                             [(ngModel)]="newHairService.price"
@@ -28,13 +28,12 @@
                     </div>
                 </div>
                 <div class="form-group padding-component">
-                    <textarea      
-                    name="questionAnswer"               
-                    rows="3" 
-                    class="form-control"                   
-                    [(ngModel)]="answer"></textarea>
+                    <label>Czas wykonania usługi</label>
+                        <input class="form-control form-control-lg" placeholder="Time"
+                            name="serviceTime" 
+                            [(ngModel)]="newHairService.serviceTime"/> 
                 </div>
-                <p>Twoja odpowiedz: {{answer}}</p>
+                <p>Wybierz rodzaj klienta</p>
                 <div class="radio padding-component" *ngFor="let typeName of typeService">
                     <label>
                         <input 

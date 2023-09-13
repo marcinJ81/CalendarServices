@@ -1,21 +1,29 @@
 <div *ngIf="serivcesList">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Nazwa </th>
-          <th>Cena </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of serivcesList">
-          <td>{{ item.id }}</td>
-          <td>{{ item.nameService }}</td>
-          <td>{{ item.price }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="row">
+    <div class="col-md-11">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nazwa </th>
+            <th>Cena </th>
+            <th>Czas realizacji</th>
+            <th>Rodzaj klienta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of serivcesList">
+            <td>{{ item.id }}</td>
+            <td>{{ item.nameService }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.serviceTime }}</td>
+            <td>{{ item.typeService }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+</div>
 <!--#f="ngForm" to jest odwolanie do formularza-->
   <app-add-hair-service></app-add-hair-service>
 
