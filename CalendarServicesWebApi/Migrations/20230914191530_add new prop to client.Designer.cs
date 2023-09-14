@@ -4,14 +4,16 @@ using CalendarServices.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CalendarServices.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230914191530_add new prop to client")]
+    partial class addnewproptoclient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,13 +66,9 @@ namespace CalendarServices.Migrations
 
                     b.Property<string>("FavoriteSeriveces");
 
-                    b.Property<int?>("TypeService_Id");
-
-                    b.Property<int?>("TypeServices_id");
+                    b.Property<int>("TypeServices_id");
 
                     b.HasKey("Customer_Id");
-
-                    b.HasIndex("TypeService_Id");
 
                     b.ToTable("Customers");
                 });
@@ -139,13 +137,6 @@ namespace CalendarServices.Migrations
                         .WithMany()
                         .HasForeignKey("Ss_id")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CalendarServices.Model.Customer", b =>
-                {
-                    b.HasOne("CalendarServices.Model.TypeService", "TypeService")
-                        .WithMany()
-                        .HasForeignKey("TypeService_Id");
                 });
 
             modelBuilder.Entity("CalendarServices.Model.HairDresserService", b =>
