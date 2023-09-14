@@ -5,7 +5,7 @@ namespace CalendarServices.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class ClientsController : ControllerBase
+	public class CustomerController : ControllerBase
 	{
 	}
 }
