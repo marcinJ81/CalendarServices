@@ -46,6 +46,13 @@ namespace CalendarServices.Controllers
 			return Ok(service);
 		}
 
+		[HttpGet("serviceNameList")]
+		public ActionResult<IEnumerable<string>> GetServicesNameList()
+		{
+			var result = QueryService.GetServiceListName();
+			return Ok(result);
+		}
+
 		[HttpGet("typeServices")]
 		public ActionResult<IEnumerable<TypeService>> GetTypeServices()
 		{

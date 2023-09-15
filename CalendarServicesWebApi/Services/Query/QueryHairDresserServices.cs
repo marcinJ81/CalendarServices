@@ -41,5 +41,13 @@ namespace CalendarServices.Services.Query
 					.TypeServices
 					.FirstOrDefault(x => x.TypeService_Name == typeName);				
 		}
+
+		public IEnumerable<string> GetServiceListName()
+		{
+			return DataBaseContext
+					.HairDressers
+					.Select(x => x.Service_Name)
+					.ToList();
+		}
 	}
 }

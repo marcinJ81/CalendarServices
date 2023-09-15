@@ -34,6 +34,8 @@ namespace CalendarServices
 			services.AddScoped<SeederServices>();
 			services.AddScoped<QueryHairDresserServices>();
 			services.AddScoped<CommandHairDresserServices>();
+			services.AddScoped<QueryCustormerService>();
+			services.AddScoped<CommandCustomerService>();
 			services.AddCors();
 		}
 

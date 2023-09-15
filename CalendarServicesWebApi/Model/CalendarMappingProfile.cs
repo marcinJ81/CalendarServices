@@ -21,6 +21,13 @@ namespace CalendarServices.Model
 				.ForMember(x => x.TypeService, y => y.Ignore())
 				.ForMember(x => x.TypeService_Id, y => y.Ignore());
 
+			CreateMap<Customer, CustomerDto>()
+				.ForMember(x => x.Id, y => y.MapFrom(z => z.Customer_Id))
+				.ForMember(x => x.Name, y => y.MapFrom(z => z.Customer_Name))
+				.ForMember(x => x.Email, y => y.MapFrom(z => z.Customer_Email))
+				.ForMember(x => x.Phone, y => y.MapFrom(z => z.Customer_Phone))
+				.ForMember(x => x.Description, y => y.MapFrom(z => z.Customer_Description))
+				.ForMember(x => x.TypeServiceName, y => y.MapFrom(z => z.TypeService != null ? z.TypeService.TypeService_Name : String.Empty));
 		}
 	}
 }

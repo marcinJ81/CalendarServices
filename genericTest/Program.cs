@@ -44,8 +44,11 @@ namespace genericTest
 		}
 	}
 
+
+	internal delegate void MyClassCallbackDelegate(MyClass mc);
 	internal class Program
 	{
+		
 		static void Main(string[] args)
 		{
 			var test = new Test<double>(1);
@@ -58,6 +61,24 @@ namespace genericTest
 			//Console.WriteLine(string.Join(" ", ints));
 
 			Console.WriteLine(reuslt);
+
+			MyClass mc = new MyClass();
+			MyClassCallbackDelegate mccd = MyClassCallback;
+
+			mc.Callback(mccd);
+		}
+
+		static void MyClassCallback(MyClass mc)
+		{
+			Console.WriteLine("Użyto wywołania zwrotnego na MyClass!");
+		}
+	}
+
+	class MyClass
+	{
+		public void Callback(MyClassCallbackDelegate mccd)
+		{
+			mccd(this);
 		}
 	}
 
