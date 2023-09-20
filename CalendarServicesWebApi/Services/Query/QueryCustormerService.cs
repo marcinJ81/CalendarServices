@@ -17,7 +17,6 @@ namespace CalendarServices.Services.Query
 		{
 			return DataBaseContext
 					.Customers
-					.Include(x => x.TypeService)
 					.ToList();
 		}
 
@@ -25,7 +24,6 @@ namespace CalendarServices.Services.Query
 		{
 			return DataBaseContext
 					.Customers
-					.Include(x => x.TypeService)
 					.FirstOrDefault(x => x.Customer_Id == customerId);
 		}
 	}

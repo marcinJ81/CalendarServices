@@ -12,8 +12,6 @@ namespace CalendarServices.Model
 		public string Customer_Email { get; set; }
 		public string Customer_Description { get; set; }
 		public string FavoriteSeriveces { get; set; }
-		[ForeignKey("TypeService_Id")]
-		public int? TypeServices_id { get; set; }
-		public virtual TypeService TypeService { get; set; }
+		public string TypeServicesName { get; set; }
 	}
 }
