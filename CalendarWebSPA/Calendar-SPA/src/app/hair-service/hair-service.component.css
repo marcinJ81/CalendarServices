@@ -2,3 +2,7 @@
     max-height: 100px;
     overflow-y: scroll;
 }
+
+.button-options{
+    width: 70px;
+}

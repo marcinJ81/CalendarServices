@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { hairServicesDTO } from '../Model/hairServices';
+import { hairServicesDTO } from '../../Model/hairServices';
 import { NgForm } from '@angular/forms';
 import { ConnectionServices } from 'src/connectionServices';
-import { endPointWebApi } from '../Model/endPointWebApi';
-import { typeService } from '../Model/typeServices';
+import { endPointWebApi } from '../../Model/endPointWebApi';
+import { typeService } from '../../Model/typeServices';
 import { Time } from '@angular/common';
 
 @Component({

@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Route, Router } from '@angular/router';
+
 import { Subscriber } from 'rxjs';
 import { ConnectionServices } from 'src/connectionServices';
-import { hairServicesDTO } from '../Model/hairServices';
 import { NgForm } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { endPointWebApi } from '../Model/endPointWebApi';
+import { hairServicesDTO } from '../Model/hairServices';
+
 
 @Component({
   selector: 'app-hair-service',
@@ -15,8 +18,9 @@ import { endPointWebApi } from '../Model/endPointWebApi';
 export class HairServiceComponent implements OnInit {
   serivcesList: hairServicesDTO[] | undefined;
   hairServiceUrl: endPointWebApi;
+  
  
-  constructor(private service: ConnectionServices) {
+  constructor(private router: Router, private service: ConnectionServices) {
     this.hairServiceUrl = new endPointWebApi();
    }
 
@@ -28,6 +32,11 @@ export class HairServiceComponent implements OnInit {
     this.service.getData(this.hairServiceUrl.HairServiceUrl).subscribe((result: hairServicesDTO[]) => {
       this.serivcesList = result;
     });
+  }
+
+  AddServiceClick() {
+    console.log(this.router.navigate(['/add']));
+    //this.router.navigate(['/add']);
   }
 
 }
