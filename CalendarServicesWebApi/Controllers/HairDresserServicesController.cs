@@ -28,7 +28,7 @@ namespace CalendarServices.Controllers
 		}
 		// GET: api/<HairDresserServicesController>
 		[HttpGet]
-		public ActionResult<IEnumerable<HairDresserServiceDto>> Get()
+		public ActionResult<IEnumerable<HairDresserServiceDto>> GetAllServices()
 		{
 			var result = mapper.Map<List<HairDresserServiceDto>>(QueryService.GetServices());
 			return Ok(result);
@@ -36,7 +36,7 @@ namespace CalendarServices.Controllers
 
 		// GET api/<HairDresserServicesController>/5
 		[HttpGet("{id}")]
-		public ActionResult<HairDresserService> Get(int id)
+		public ActionResult<HairDresserService> GetSpecificService(int id)
 		{
 			var service = QueryService.GetService(id);
 			if (service == null)
@@ -46,19 +46,21 @@ namespace CalendarServices.Controllers
 			return Ok(service);
 		}
 
-		[HttpGet("serviceNameList")]
-		public ActionResult<IEnumerable<string>> GetServicesNameList()
-		{
-			var result = QueryService.GetServiceListName();
-			return Ok(result);
-		}
-
 		[HttpGet("typeServices")]
 		public ActionResult<IEnumerable<TypeService>> GetTypeServices()
 		{
 			var typService = QueryService.GetTypeService();
 			return Ok(typService);
 		}
+
+		[HttpGet("serviceNameList")]
+		public ActionResult<IEnumerable<string>> GetServicesNameList()
+		{
+			var result = QueryService.GetTypeService();
+			return Ok(result);
+		}
+
+		
 
 		// POST api/<HairDresserServicesController>
 		[HttpPost]
