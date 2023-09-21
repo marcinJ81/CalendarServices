@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { hairServicesDTO } from '../../Model/hairServices';
 import { NgForm } from '@angular/forms';
 import { ConnectionServices } from 'src/connectionServices';
 import { endPointWebApi } from '../../Model/endPointWebApi';
 import { typeService } from '../../Model/typeServices';
 import { Time } from '@angular/common';
+
 
 @Component({
   selector: 'app-add-hair-service',
@@ -20,7 +22,7 @@ export class AddHairServiceComponent implements OnInit {
   defaultTime: Date = new Date();
   formValue: object | undefined;
 
-  constructor(private service: ConnectionServices) {
+  constructor(private router: Router, private service: ConnectionServices) {
     this.hairServiceUrl = new endPointWebApi();
   }
 
@@ -64,6 +66,8 @@ export class AddHairServiceComponent implements OnInit {
 
     refreshValue() {
       this.signupForm.reset();
+      //this is not good for me, not refresh list
+      this.router.navigate(['/services']);
     }
 
     suggestValue(){

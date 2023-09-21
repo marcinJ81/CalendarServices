@@ -13,7 +13,7 @@ import { CalendarListComponent } from './calendar-list/calendar-list.component';
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'services', component: HairServiceComponent, children: [
-        {path: 'addservice', component: AddHairServiceComponent}
+        {path: 'add', component: AddHairServiceComponent}
     ]},
     { path: 'customers', component: CustomerComponent, children: [
         {path: 'addcustomer', component: AddCustomerComponent},

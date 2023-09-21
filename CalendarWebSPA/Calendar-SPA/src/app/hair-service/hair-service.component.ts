@@ -35,8 +35,15 @@ export class HairServiceComponent implements OnInit {
   }
 
   AddServiceClick() {
-    console.log(this.router.navigate(['/add']));
-    //this.router.navigate(['/add']);
+    this.router.navigate(['/services', 'add']);
+  }
+
+  EditServiceClick(id: number) {
+
+  }
+
+  DeleteServiceClick(id: number) {
+    console.log("in the future");
   }
 
 }
