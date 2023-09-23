@@ -2,6 +2,12 @@
   <div *ngIf="serivcesList">
     <div class="row">
       <div class="col-md-1"></div>
+      <div class="col-md-1" *ngIf="visibleButton">
+        <button class="btn btn-primary" (click)="AddServiceClick()">Dodaj</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
       <div class="col-md-10">
         <table class="table table-striped table-bordered table-sm">
           <thead>
@@ -22,7 +28,7 @@
               <td>{{ item.serviceTime }}</td>
               <td>{{ item.typeService }}</td>
               <td style="width: 200px;">
-                <button class="btn btn-primary button-options">Edytuj</button> | 
+                <button class="btn btn-primary button-options" (click)="EditServiceClick(item.id)" >Edytuj</button>| 
                 <button class="btn btn-primary button-options">Usuń</button></td>
             </tr>
           </tbody>
@@ -30,12 +36,6 @@
       </div>
       <div class="col-md-1"></div>
     </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-1">
-    <button class="btn btn-primary" (click)="AddServiceClick()">Dodaj usługę</button>
   </div>
 </div>
 <router-outlet></router-outlet>

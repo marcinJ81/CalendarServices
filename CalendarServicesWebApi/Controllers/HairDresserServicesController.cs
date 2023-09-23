@@ -36,9 +36,9 @@ namespace CalendarServices.Controllers
 
 		// GET api/<HairDresserServicesController>/5
 		[HttpGet("{id}")]
-		public ActionResult<HairDresserService> GetSpecificService(int id)
+		public ActionResult<HairDresserServiceDto> GetSpecificService(int id)
 		{
-			var service = QueryService.GetService(id);
+			var service = mapper.Map<HairDresserServiceDto>(QueryService.GetService(id));
 			if (service == null)
 			{
 				return NotFound();

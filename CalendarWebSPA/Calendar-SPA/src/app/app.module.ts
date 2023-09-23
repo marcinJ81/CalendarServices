@@ -14,6 +14,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { EditCustomerComponent } from './customer/edit-customer/edit-customer.component';
 import { AddCustomerComponent } from './customer/add-customer/add-customer.component';
 import { CalendarListComponent } from './calendar-list/calendar-list.component';
+import { EditHairServiceComponent } from './hair-service/edit-hair-service/edit-hair-service.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { CalendarListComponent } from './calendar-list/calendar-list.component';
     CustomerComponent,
     EditCustomerComponent,
     AddCustomerComponent,
-    CalendarListComponent
+    CalendarListComponent,
+    EditHairServiceComponent
   ],
   imports: [
     BrowserModule,

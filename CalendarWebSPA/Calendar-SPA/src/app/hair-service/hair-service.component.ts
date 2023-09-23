@@ -1,14 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {  Router } from '@angular/router';
 
-import { Subscriber } from 'rxjs';
 import { ConnectionServices } from 'src/connectionServices';
-import { NgForm } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
 import { endPointWebApi } from '../Model/endPointWebApi';
-import { hairServicesDTO } from '../Model/hairServices';
-
+import { hairServices } from '../Model/hairServices';
 
 @Component({
   selector: 'app-hair-service',
@@ -16,20 +11,23 @@ import { hairServicesDTO } from '../Model/hairServices';
   styleUrls: ['./hair-service.component.css']
 })
 export class HairServiceComponent implements OnInit {
-  serivcesList: hairServicesDTO[] | undefined;
+  serivcesList: hairServices[] | undefined;
   hairServiceUrl: endPointWebApi;
+  visibleButton: boolean = true;
+
   
- 
   constructor(private router: Router, private service: ConnectionServices) {
     this.hairServiceUrl = new endPointWebApi();
    }
 
   ngOnInit(): void {
+    //this.visibleButton = true;
+    //???
     this.refreshList();
   }
 
   refreshList(): void {
-    this.service.getData(this.hairServiceUrl.HairServiceUrl).subscribe((result: hairServicesDTO[]) => {
+    this.service.getData(this.hairServiceUrl.HairServiceUrl).subscribe((result: hairServices[]) => {
       this.serivcesList = result;
     });
   }
@@ -39,7 +37,9 @@ export class HairServiceComponent implements OnInit {
   }
 
   EditServiceClick(id: number) {
-
+    this.visibleButton = false;
+    this.router.navigate(['/services', id, 'edit'], {queryParams: {allowEdit: id}});
+    //this.router.navigate(['edit'], {queryParams: {allowEdit: id}}, {relativeTo: this.router}, );
   }
 
   DeleteServiceClick(id: number) {

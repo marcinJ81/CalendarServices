@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,6 +11,14 @@ export class ConnectionServices {
 
   getData(apiUrl: string): Observable<any> {
     return this.http.get(apiUrl);
+  }
+
+  getSpecificDataFromUrl(apiUrl: string, prameter: any): Observable<any> {
+    //const params = new HttpParams().set('id', id);
+    //const apiUrlWithParams = `${apiUrl}?${params.toString()}`;
+    //parametr from route
+    const urlWithId = `${apiUrl}/${prameter}`;
+    return this.http.get(urlWithId);
   }
 
   postData(data: any, apiUrl: string): Observable<any> {

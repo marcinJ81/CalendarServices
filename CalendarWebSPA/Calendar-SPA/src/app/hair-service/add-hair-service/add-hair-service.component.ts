@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { hairServicesDTO } from '../../Model/hairServices';
+import { hairServices } from '../../Model/hairServices';
 import { NgForm } from '@angular/forms';
 import { ConnectionServices } from 'src/connectionServices';
 import { endPointWebApi } from '../../Model/endPointWebApi';
 import { typeService } from '../../Model/typeServices';
-import { Time } from '@angular/common';
 
 
 @Component({
@@ -14,7 +13,7 @@ import { Time } from '@angular/common';
   styleUrls: ['./add-hair-service.component.css']
 })
 export class AddHairServiceComponent implements OnInit {
-  newHairService: hairServicesDTO = new hairServicesDTO();
+  newHairService: hairServices = new hairServices();
   @ViewChild('f') signupForm!: NgForm;
   typeServiceList: typeService[] = [];
   selectedType: string = 'Kobieta';
@@ -37,7 +36,7 @@ export class AddHairServiceComponent implements OnInit {
 
   insertRecord(form:NgForm) {
     //one way
-    let newService: hairServicesDTO = {
+    let newService: hairServices = {
       nameService: form.value.serviceData.nameService,
       serviceTime: form.value.serviceTime,
       id: 0,
@@ -45,7 +44,7 @@ export class AddHairServiceComponent implements OnInit {
       typeService: form.value.typeServiceName
     }
     //another way
-    let newService2: hairServicesDTO = {
+    let newService2: hairServices = {
       nameService: this.signupForm.value.serviceData.nameService,
       serviceTime: this.signupForm.value.serviceTime,
       id: 0,
