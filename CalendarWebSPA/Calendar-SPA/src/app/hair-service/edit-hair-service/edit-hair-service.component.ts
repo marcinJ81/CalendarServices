@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { endPointWebApi } from 'src/app/Model/endPointWebApi';
 import { hairServices } from 'src/app/Model/hairServices';
 import { typeService } from 'src/app/Model/typeServices';
@@ -18,39 +18,87 @@ export class EditHairServiceComponent implements OnInit {
   id: number = -1;
   typeServiceList: typeService[] = [];
   formValue: object | undefined;
+  paramsSub: any;
 
-  constructor(private route: ActivatedRoute, private service: ConnectionServices) {
+  constructor(private route: ActivatedRoute,
+              private service: ConnectionServices,
+              private router: Router) {
     this.hairServiceUrl = new endPointWebApi();
    }
 
   ngOnInit(): void {
     this.getData();
-    if (this.editHairService.id > 0)
-    {
-      this.suggestValue();
-    }
   }
 
   getData() {
-    this.route.queryParams.subscribe(
-      (queryParams: Params) => {
-      this.id = +queryParams['allowEdit'];
-    });
-    this.service.getSpecificDataFromUrl(this.hairServiceUrl.HairServiceUrl, this.id ).subscribe((result: hairServices) => {
-      this.editHairService = result;
-      this.suggestValue();
+      this.getTypeServices();
+      this.paramsSub = this.route.params.subscribe(params => this.id = parseInt(params['id']));
+      this.service.getSpecificDataFromUrl(this.hairServiceUrl.HairServiceUrl, this.id ).subscribe((result: hairServices) => {
+        this.editHairService =  new hairServices();
+        this.editHairService.id = result.id;
+        this.editHairService.nameService = result.nameService;
+        this.editHairService.price = result.price;
+        this.editHairService.serviceTime = this.formatTime(result.serviceTime);
+      });
+  }
+
+  getTypeServices(){
+    this.service.getData(this.hairServiceUrl.TypeServiceUrl).subscribe((result: typeService[]) => {
+      this.typeServiceList = result;
     });
   }
 
   onSubmit(form: NgForm) {
-    //put data
+    this.updateRecord(form, this.id);
+    this.refreshValue();
   }
 
-  suggestValue(){
-    this.signupForm.form.patchValue({
-      nameService: this.editHairService.nameService
-    });
+  formatTime(inputTime: string): string {
+    const parts = inputTime.split(":");
+    let hours = parts[0];
+    let minutes = parts[1];
+  
+   
+    hours = this.padWithZero(hours);
+    minutes = this.padWithZero(minutes);
+  
+    return `${hours}:${minutes}`;
+  }
+
+  padWithZero(value: string): string {
+  return value.length === 1 ? `0${value}` : value;
+  }
+
+  ngOnDestroy() {
+    this.paramsSub.unsubscribe();
+  }
+
+  refreshValue() {
+    this.signupForm.reset();
+    //this is not good for me, not refresh list
+    this.router.navigate(['/services']);
   }
 
 
+  updateRecord(form:NgForm, id: number) {
+    //another way
+    let newService2: hairServices = {
+      id: this.id,
+      nameService: this.signupForm.value.nameService,
+      serviceTime: this.signupForm.value.serviceTime,
+      price: this.signupForm.value.price,
+      typeService: this.signupForm.value.typeServiceName
+    }
+
+     this.formValue = form.value;
+      this.service.putData(newService2,this.hairServiceUrl.HairServiceUrl,id).subscribe(
+        res => {
+         //maybe 200 return?
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  
 }

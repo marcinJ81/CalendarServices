@@ -25,7 +25,7 @@
               <td>{{ item.id }}</td>
               <td>{{ item.nameService }}</td>
               <td>{{ item.price }}</td>
-              <td>{{ item.serviceTime }}</td>
+              <td>{{ formatTime(item.serviceTime) }}</td>
               <td>{{ item.typeService }}</td>
               <td style="width: 200px;">
                 <button class="btn btn-primary button-options" (click)="EditServiceClick(item.id)" >Edytuj</button>| 

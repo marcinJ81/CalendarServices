@@ -16,13 +16,18 @@ export class ConnectionServices {
   getSpecificDataFromUrl(apiUrl: string, prameter: any): Observable<any> {
     //const params = new HttpParams().set('id', id);
     //const apiUrlWithParams = `${apiUrl}?${params.toString()}`;
-    //parametr from route
+    //parametr from query
     const urlWithId = `${apiUrl}/${prameter}`;
     return this.http.get(urlWithId);
   }
 
   postData(data: any, apiUrl: string): Observable<any> {
     return this.http.post(apiUrl, data);
+  }
+
+  putData(data: any, apiUrl: string, id: any): Observable<any> {
+    const urlWithId = `${apiUrl}/${id}`;
+    return this.http.put(urlWithId, data);
   }
 
   getServices(apiUrl: string): any{

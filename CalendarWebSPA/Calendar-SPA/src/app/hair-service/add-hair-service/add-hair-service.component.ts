@@ -6,7 +6,6 @@ import { ConnectionServices } from 'src/connectionServices';
 import { endPointWebApi } from '../../Model/endPointWebApi';
 import { typeService } from '../../Model/typeServices';
 
-
 @Component({
   selector: 'app-add-hair-service',
   templateUrl: './add-hair-service.component.html',
@@ -31,7 +30,6 @@ export class AddHairServiceComponent implements OnInit {
   
   onSubmit(form: NgForm) {
     this.insertRecord(form);
-    console.log(this.signupForm);
   }
 
   insertRecord(form:NgForm) {

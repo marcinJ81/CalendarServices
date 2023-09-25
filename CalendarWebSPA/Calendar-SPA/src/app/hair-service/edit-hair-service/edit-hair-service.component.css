@@ -6,3 +6,9 @@
 input.ng-invalid.ng-touched {
     border: 1px solid red;
 }
+
+.padding-component {
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

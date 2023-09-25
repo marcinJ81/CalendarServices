@@ -21,9 +21,9 @@ const appRoutes: Routes = [
         { path: 'addcustomer', component: AddCustomerComponent },
         { path: ':id/edit', component: EditCustomerComponent }
     ]},
-    { path: 'calendar', component: CalendarListComponent },
-    { path: 'not-found', component: PageNotFoundComponent },
-    { path: '**', redirectTo: '/not-found'}
+    { path: 'calendar', component: CalendarListComponent }//,
+   // { path: 'not-found', component: PageNotFoundComponent },
+   // { path: '**', redirectTo: '/not-found'}
 ];
 @NgModule ({
     imports: [

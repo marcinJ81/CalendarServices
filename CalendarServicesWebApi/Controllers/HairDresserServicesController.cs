@@ -88,16 +88,19 @@ namespace CalendarServices.Controllers
 
 		// PUT api/<HairDresserServicesController>/5
 		[HttpPut("{id}")]
-		public ActionResult Update([FromBody] HairServiceUpdateDto model, [FromRoute] int id)
+		public ActionResult Update([FromBody] HairDresserServiceDto model, [FromRoute] int id)
 		{
 			var localService = QueryService.GetService(id);
 			if (localService == null)
 			{
 				return NotFound();
 			}
-			localService.Service_Name = model.Name;
+			localService.Service_Name = model.NameService;
 			localService.Service_Price = Convert.ToDecimal(model.Price);
-			CommandService.UpdateService(localService);
+			localService.Service_Time = TimeSpan.Parse(model.ServiceTime);
+			localService.TypeService_Id = QueryService.GetTypeService(model.TypeService).TypeService_Id;
+
+            CommandService.UpdateService(localService);
 			return Ok();
 		}
 

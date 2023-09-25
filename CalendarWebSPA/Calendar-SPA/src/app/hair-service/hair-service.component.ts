@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {  Router } from '@angular/router';
+import {  ActivatedRoute, Router } from '@angular/router';
 
 import { ConnectionServices } from 'src/connectionServices';
 import { endPointWebApi } from '../Model/endPointWebApi';
 import { hairServices } from '../Model/hairServices';
+import { formatMethod } from '../services/formatMethod';
 
 @Component({
   selector: 'app-hair-service',
@@ -16,13 +17,14 @@ export class HairServiceComponent implements OnInit {
   visibleButton: boolean = true;
 
   
-  constructor(private router: Router, private service: ConnectionServices) {
+  constructor(private router: ActivatedRoute,
+               private service: ConnectionServices,
+               private route: Router,
+               private formatString: formatMethod) {
     this.hairServiceUrl = new endPointWebApi();
    }
 
   ngOnInit(): void {
-    //this.visibleButton = true;
-    //???
     this.refreshList();
   }
 
@@ -33,17 +35,21 @@ export class HairServiceComponent implements OnInit {
   }
 
   AddServiceClick() {
-    this.router.navigate(['/services', 'add']);
+    this.route.navigate(['/services', 'add']);
   }
 
   EditServiceClick(id: number) {
     this.visibleButton = false;
-    this.router.navigate(['/services', id, 'edit'], {queryParams: {allowEdit: id}});
-    //this.router.navigate(['edit'], {queryParams: {allowEdit: id}}, {relativeTo: this.router}, );
+    this.route.navigate(['/services', id, 'edit']);
+    //.route.navigate(['edit'], {relativeTo: this.router} ); //not working
   }
 
   DeleteServiceClick(id: number) {
     console.log("in the future");
+  }
+
+  formatTime(paramText: string) :string {
+    return this.formatString.formatTime(paramText);
   }
 
 }
