@@ -1,4 +1,4 @@
-export class hairServicesDTO{
+export class hairServices{
     id: number;
     nameService: string;
     price: string; 

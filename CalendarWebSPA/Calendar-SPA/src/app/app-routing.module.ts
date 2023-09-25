@@ -9,19 +9,21 @@ import { CustomerComponent } from './customer/customer.component';
 import { AddCustomerComponent } from './customer/add-customer/add-customer.component';
 import { EditCustomerComponent } from './customer/edit-customer/edit-customer.component';
 import { CalendarListComponent } from './calendar-list/calendar-list.component';
+import { EditHairServiceComponent } from './hair-service/edit-hair-service/edit-hair-service.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'services', component: HairServiceComponent, children: [
-        {path: 'add', component: AddHairServiceComponent}
+        { path: 'add', component: AddHairServiceComponent },
+        { path: ':id/edit', component: EditHairServiceComponent }
     ]},
     { path: 'customers', component: CustomerComponent, children: [
-        {path: 'addcustomer', component: AddCustomerComponent},
-        {path: ':id/edit', component: EditCustomerComponent}
+        { path: 'addcustomer', component: AddCustomerComponent },
+        { path: ':id/edit', component: EditCustomerComponent }
     ]},
-    { path: 'calendar', component: CalendarListComponent},
-    { path: 'not-found', component: PageNotFoundComponent },
-    { path: '**', redirectTo: '/not-found'}
+    { path: 'calendar', component: CalendarListComponent }//,
+   // { path: 'not-found', component: PageNotFoundComponent },
+   // { path: '**', redirectTo: '/not-found'}
 ];
 @NgModule ({
     imports: [

@@ -1,39 +1,40 @@
+<div ><h5 class="title">Edycja wybranego elementu</h5></div>
 <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-4 form-group ">
+    <div class="col-md-4 form-group">
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="form-row">
-                <div id="service-data" ngModelGroup="serviceData">
-                    <div class="form-group col-md-12 padding-component">
-                        <label>Nazwa usługi</label>
-                        <input 
-                            class="form-control form-control-lg"
-                            name="nameService"
-                            [(ngModel)]="newHairService.nameService" 
-                            required
-                            #nameService="ngModel"/> 
-                            <span class="help-block" *ngIf="!nameService.valid && nameService.touched">To pole nie może być puste</span>
-                    </div>
-                    <div class="form-group col-md-12 padding-component">
-                        <label>Cena</label>
-                        <input class="form-control form-control-lg" placeholder="Price"
-                            name="price" 
-                            [(ngModel)]="newHairService.price"
-                            required/> 
-                    </div>
+                <div class="form-group col-md-12 padding-component">
+                    <label>Nazwa usługi</label>
+                    <input 
+                        class="form-control form-control-lg"
+                        name="nameService"
+                        [(ngModel)]="editHairService.nameService" 
+                        required
+                        #nameService="ngModel"
+                    /> 
+                        <span class="help-block" *ngIf="!nameService.valid && nameService.touched">To pole nie może być puste</span>
+                </div>
+                <div class="form-group col-md-12 padding-component">
+                    <label>Cena</label>
+                    <input class="form-control form-control-lg" placeholder="Price"
+                        name="price" 
+                        [(ngModel)]="editHairService.price"
+                        required/> 
                 </div>
                 <div class="form-group padding-component">
                     <label>Czas wykonania usługi</label>
                         <input type="time" class="form-control form-control-lg"
                             name="serviceTime" 
-                            [(ngModel)]="newHairService.serviceTime"/> 
+                            [(ngModel)]="editHairService.serviceTime"
+                        /> 
                 </div>
-                <p class="padding-p-component">Wybierz rodzaj klienta</p>
                 <div class="form-group padding-component">
+                    <p class="padding-p-component">Wybierz rodzaj klienta</p>
                     <select 
                         name="typeServiceName" 
                         id="typeServiceName" 
-                        [ngModel]="selectedType" 
+                        [ngModel]="editHairService.typeService" 
                         class="drop-down form-control">
                         <option
                         *ngFor="let typeName of typeServiceList"

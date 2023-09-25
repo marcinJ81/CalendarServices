@@ -17,6 +17,7 @@ namespace CalendarServices.Services.Query
 		{
 			return DataBaseContext
 					.HairDressers
+					.Include(x => x.TypeService)
 					.FirstOrDefault(x => x.Service_Id == id)
 ;		}
 

@@ -1,14 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {  ActivatedRoute, Router } from '@angular/router';
 
-import { Subscriber } from 'rxjs';
 import { ConnectionServices } from 'src/connectionServices';
-import { NgForm } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
 import { endPointWebApi } from '../Model/endPointWebApi';
-import { hairServicesDTO } from '../Model/hairServices';
-
+import { hairServices } from '../Model/hairServices';
+import { formatMethod } from '../services/formatMethod';
 
 @Component({
   selector: 'app-hair-service',
@@ -16,11 +12,15 @@ import { hairServicesDTO } from '../Model/hairServices';
   styleUrls: ['./hair-service.component.css']
 })
 export class HairServiceComponent implements OnInit {
-  serivcesList: hairServicesDTO[] | undefined;
+  serivcesList: hairServices[] | undefined;
   hairServiceUrl: endPointWebApi;
+  visibleButton: boolean = true;
+
   
- 
-  constructor(private router: Router, private service: ConnectionServices) {
+  constructor(private router: ActivatedRoute,
+               private service: ConnectionServices,
+               private route: Router,
+               private formatString: formatMethod) {
     this.hairServiceUrl = new endPointWebApi();
    }
 
@@ -29,21 +29,27 @@ export class HairServiceComponent implements OnInit {
   }
 
   refreshList(): void {
-    this.service.getData(this.hairServiceUrl.HairServiceUrl).subscribe((result: hairServicesDTO[]) => {
+    this.service.getData(this.hairServiceUrl.HairServiceUrl).subscribe((result: hairServices[]) => {
       this.serivcesList = result;
     });
   }
 
   AddServiceClick() {
-    this.router.navigate(['/services', 'add']);
+    this.route.navigate(['/services', 'add']);
   }
 
   EditServiceClick(id: number) {
-
+    this.visibleButton = false;
+    this.route.navigate(['/services', id, 'edit']);
+    //.route.navigate(['edit'], {relativeTo: this.router} ); //not working
   }
 
   DeleteServiceClick(id: number) {
     console.log("in the future");
+  }
+
+  formatTime(paramText: string) :string {
+    return this.formatString.formatTime(paramText);
   }
 
 }
