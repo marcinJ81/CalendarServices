@@ -10,7 +10,6 @@ namespace CalendarServices.ModelDTO
 		[MaxLength(50)]
 		public string NameService { get; set; }
 		[Required]
-		[Range(10,100)]
 		public string Price { get; set; }
 		public string ServiceTime { get; set; } 
 		public String TypeService { get; set; }

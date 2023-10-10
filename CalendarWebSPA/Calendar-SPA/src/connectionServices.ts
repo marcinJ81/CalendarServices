@@ -14,9 +14,6 @@ export class ConnectionServices {
   }
 
   getSpecificDataFromUrl(apiUrl: string, prameter: any): Observable<any> {
-    //const params = new HttpParams().set('id', id);
-    //const apiUrlWithParams = `${apiUrl}?${params.toString()}`;
-    //parametr from query
     const urlWithId = `${apiUrl}/${prameter}`;
     return this.http.get(urlWithId);
   }

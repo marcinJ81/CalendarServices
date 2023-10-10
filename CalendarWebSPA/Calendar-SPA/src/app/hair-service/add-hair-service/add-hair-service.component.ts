@@ -33,16 +33,7 @@ export class AddHairServiceComponent implements OnInit {
   }
 
   insertRecord(form:NgForm) {
-    //one way
     let newService: hairServices = {
-      nameService: form.value.serviceData.nameService,
-      serviceTime: form.value.serviceTime,
-      id: 0,
-      price: form.value.serviceData.price,
-      typeService: form.value.typeServiceName
-    }
-    //another way
-    let newService2: hairServices = {
       nameService: this.signupForm.value.serviceData.nameService,
       serviceTime: this.signupForm.value.serviceTime,
       id: 0,
@@ -51,7 +42,7 @@ export class AddHairServiceComponent implements OnInit {
     }
 
      this.formValue = form.value;
-      this.service.postData(newService2,this.hairServiceUrl.HairServiceUrl).subscribe(
+      this.service.postData(newService,this.hairServiceUrl.HairServiceUrl).subscribe(
         res => {
           this.refreshValue();
         },

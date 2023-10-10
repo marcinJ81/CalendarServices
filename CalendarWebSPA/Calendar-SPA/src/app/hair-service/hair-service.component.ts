@@ -5,6 +5,7 @@ import { ConnectionServices } from 'src/connectionServices';
 import { endPointWebApi } from '../Model/endPointWebApi';
 import { hairServices } from '../Model/hairServices';
 import { formatMethod } from '../services/formatMethod';
+import { DataService } from '../services/DataService';
 
 @Component({
   selector: 'app-hair-service',
@@ -12,7 +13,7 @@ import { formatMethod } from '../services/formatMethod';
   styleUrls: ['./hair-service.component.css']
 })
 export class HairServiceComponent implements OnInit {
-  serivcesList: hairServices[] | undefined;
+  serivcesList: hairServices[] = [];
   hairServiceUrl: endPointWebApi;
   visibleButton: boolean = true;
 
@@ -20,7 +21,10 @@ export class HairServiceComponent implements OnInit {
   constructor(private router: ActivatedRoute,
                private service: ConnectionServices,
                private route: Router,
-               private formatString: formatMethod) {
+               private formatString: formatMethod,
+               private dataService: DataService
+               ) 
+   {
     this.hairServiceUrl = new endPointWebApi();
    }
 
@@ -29,9 +33,11 @@ export class HairServiceComponent implements OnInit {
   }
 
   refreshList(): void {
+    //zamiast tego 
     this.service.getData(this.hairServiceUrl.HairServiceUrl).subscribe((result: hairServices[]) => {
       this.serivcesList = result;
     });
+    this.dataService.updateServicesList(this.serivcesList);
   }
 
   AddServiceClick() {

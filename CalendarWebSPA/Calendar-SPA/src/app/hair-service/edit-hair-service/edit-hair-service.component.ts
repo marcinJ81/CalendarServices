@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { endPointWebApi } from 'src/app/Model/endPointWebApi';
 import { hairServices } from 'src/app/Model/hairServices';
 import { typeService } from 'src/app/Model/typeServices';
+import { formatMethod } from 'src/app/services/formatMethod';
 import { ConnectionServices } from 'src/connectionServices';
 
 @Component({
@@ -22,7 +23,8 @@ export class EditHairServiceComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private service: ConnectionServices,
-              private router: Router) {
+              private router: Router,
+              private formatText: formatMethod) {
     this.hairServiceUrl = new endPointWebApi();
    }
 
@@ -38,7 +40,7 @@ export class EditHairServiceComponent implements OnInit {
         this.editHairService.id = result.id;
         this.editHairService.nameService = result.nameService;
         this.editHairService.price = result.price;
-        this.editHairService.serviceTime = this.formatTime(result.serviceTime);
+        this.editHairService.serviceTime = this.formatText.formatTime(result.serviceTime);
       });
   }
 
@@ -53,22 +55,6 @@ export class EditHairServiceComponent implements OnInit {
     this.refreshValue();
   }
 
-  formatTime(inputTime: string): string {
-    const parts = inputTime.split(":");
-    let hours = parts[0];
-    let minutes = parts[1];
-  
-   
-    hours = this.padWithZero(hours);
-    minutes = this.padWithZero(minutes);
-  
-    return `${hours}:${minutes}`;
-  }
-
-  padWithZero(value: string): string {
-  return value.length === 1 ? `0${value}` : value;
-  }
-
   ngOnDestroy() {
     this.paramsSub.unsubscribe();
   }
@@ -78,7 +64,6 @@ export class EditHairServiceComponent implements OnInit {
     //this is not good for me, not refresh list
     this.router.navigate(['/services']);
   }
-
 
   updateRecord(form:NgForm, id: number) {
     //another way
